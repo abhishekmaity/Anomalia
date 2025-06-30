@@ -1,1 +1,20 @@
+# .gitignore
+
+# Java
+/target
+*.class
+*.log
+
+# Python
+__pycache__/
+*.pyc
 .env
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+
