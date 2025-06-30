@@ -1,10 +1,9 @@
-# 🌐 Anomalia – Cross-Domain Global Anomaly Detector
+## 🌐 Anomalia – Cross-Domain Global Anomaly Detector
 
 Anomalia is a full-stack, real-time anomaly detection system that ingests and analyzes data across geophysical, environmental, social, epidemiological, and financial domains. Designed for large-scale awareness and research, it leverages modern open-source technologies and global data APIs.
 
 ---
-
-## 🚀 Tech Stack
+### 🚀 Tech Stack
 
 | Layer       | Technology                                          |
 |-------------|-----------------------------------------------------|
@@ -16,17 +15,10 @@ Anomalia is a full-stack, real-time anomaly detection system that ingests and an
 
 ---
 
-## 📡 Data Sources
+### 📡 Data Sources
 
 - 🌍 **USGS**: Real-time earthquake data  
 - 🌤 **OpenWeatherMap**: Climate anomalies 
 - 🧬 **WHO**: Public health outbreak alerts  
 - 💬 **Reddit API**: Social signal spikes  
 - 📉 **Alpha Vantage**: Financial volatility
-
----
-
-## 📐 System Architecture
-
-```txt
-Python Producers --> Kafka --> Spring Boot --> PostgreSQL/TimescaleDB --> REST APIs --> React Dashboard
