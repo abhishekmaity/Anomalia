@@ -1,0 +1,11 @@
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+info:
+  app:
+    title: Anomalia API
+    description: Cross-Domain Global Anomaly Detection Backend
+    version: 0.1.0
