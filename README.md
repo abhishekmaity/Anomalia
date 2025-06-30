@@ -23,3 +23,7 @@ Anomalia is a full-stack, real-time anomaly detection system that ingests and an
 - 🧬 **WHO**: Public health outbreak alerts  
 - 💬 **Reddit API**: Social signal spikes  
 - 📉 **Alpha Vantage**: Financial volatility
+
+### 📐 System Architecture
+
+![System Architecture](docs/architecture.png)
