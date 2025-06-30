@@ -10,7 +10,7 @@ Anomalia is a full-stack, real-time anomaly detection system that ingests and an
 | Ingestion   | Python + Kafka Producers                            |
 | Backend     | Spring Boot (Java 17) + Kafka Consumers + REST APIs |
 | Database    | PostgreSQL / TimescaleDB                            |
-| Frontend    | ReactJS Dashboard                   |
+| Frontend    | ReactJS Dashboard                                   |
 | DevOps      | Docker, Kafka UI, GitHub                            |
 
 ---
