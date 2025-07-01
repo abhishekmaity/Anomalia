@@ -19,8 +19,8 @@ public class EarthquakeController {
 
     @Operation(summary = "Get recent earthquake anomalies")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Successfully retrieved earthquake data"),
-        @ApiResponse(responseCode = "500", description = "Internal server error")
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved earthquake data"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     @GetMapping
     public List<EarthquakeEvent> getRecentEarthquakes() {
