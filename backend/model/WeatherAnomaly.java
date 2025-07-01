@@ -20,21 +20,51 @@ public class WeatherAnomaly {
     private Instant timestamp;
 
     // Getters and Setters
-    public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
+    public String getId() {
+        return id;
+    }
 
-    public String getCity() { return city; }
-    public void setCity(String city) { this.city = city; }
+    public void setId(String id) {
+        this.id = id;
+    }
 
-    public double getTemperature() { return temperature; }
-    public void setTemperature(double temperature) { this.temperature = temperature; }
+    public String getCity() {
+        return city;
+    }
 
-    public double getHumidity() { return humidity; }
-    public void setHumidity(double humidity) { this.humidity = humidity; }
+    public void setCity(String city) {
+        this.city = city;
+    }
 
-    public double getWindSpeed() { return windSpeed; }
-    public void setWindSpeed(double windSpeed) { this.windSpeed = windSpeed; }
+    public double getTemperature() {
+        return temperature;
+    }
 
-    public Instant getTimestamp() { return timestamp; }
-    public void setTimestamp(Instant timestamp) { this.timestamp = timestamp; }
+    public void setTemperature(double temperature) {
+        this.temperature = temperature;
+    }
+
+    public double getHumidity() {
+        return humidity;
+    }
+
+    public void setHumidity(double humidity) {
+        this.humidity = humidity;
+    }
+
+    public double getWindSpeed() {
+        return windSpeed;
+    }
+
+    public void setWindSpeed(double windSpeed) {
+        this.windSpeed = windSpeed;
+    }
+
+    public Instant getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Instant timestamp) {
+        this.timestamp = timestamp;
+    }
 }
