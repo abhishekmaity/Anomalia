@@ -1,8 +1,21 @@
+package com.anomalia.backend.service;
+
+import com.anomalia.backend.model.EarthquakeEvent;
+import com.anomalia.backend.repository.EarthquakeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 @Service
 public class EarthquakeService {
 
+    private final EarthquakeRepository repository;
+
     @Autowired
-    private EarthquakeEventRepository repository;
+    public EarthquakeService(EarthquakeRepository repository) {
+        this.repository = repository;
+    }
 
     public List<EarthquakeEvent> getAllRecent() {
         return repository.findAll();
