@@ -2,7 +2,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/anomalia
     username: postgres
-    password: anomalia123
+    password: anomalia
     driver-class-name: org.postgresql.Driver
 
   jpa:
