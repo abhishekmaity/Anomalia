@@ -1,4 +1,3 @@
-// 📁 File: model/SocialTrend.java
 package com.anomalia.backend.model;
 
 import jakarta.persistence.Entity;
