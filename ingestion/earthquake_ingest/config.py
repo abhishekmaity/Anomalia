@@ -3,7 +3,7 @@ USGS_FEED_URL = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_h
 DB_CONFIG = {
     'dbname': 'anomalia',
     'user': 'postgres',
-    'password': 'postgres',
+    'password': 'anomalia',
     'host': 'localhost',
     'port': 5432,
 }
