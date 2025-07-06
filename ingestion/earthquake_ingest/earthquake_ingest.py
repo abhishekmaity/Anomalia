@@ -52,6 +52,6 @@ if __name__ == "__main__":
     try:
         quake_data = fetch_earthquake_data()
         store_earthquakes(quake_data)
-        print("✅ Earthquake data ingested successfully.")
+        print("Earthquake data ingested successfully.")
     except Exception as e:
-        print("❌ Error:", e)
+        print("Error:", e)
