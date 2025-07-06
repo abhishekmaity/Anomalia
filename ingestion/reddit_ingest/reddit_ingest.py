@@ -9,11 +9,11 @@ dotenv_path = Path(__file__).parent / '.env'
 load_dotenv(dotenv_path=dotenv_path)
 
 # Reddit credentials
-REDDIT_CLIENT_ID = os.getenv("W1Fnuv5ExpxppibkJcyfIA")
-REDDIT_CLIENT_SECRET = os.getenv("sxZyxX5PuP6annGQt9ksWGVHQgyYQA")
-REDDIT_USER_AGENT = os.getenv("AnomaliaTrendApp/1.0 for project")
-REDDIT_USERNAME = os.getenv("anomalia_devlopment")
-REDDIT_PASSWORD = os.getenv("anomalia")
+REDDIT_CLIENT_ID = os.getenv("REDDIT_CLIENT_ID")
+REDDIT_CLIENT_SECRET = os.getenv("REDDIT_CLIENT_SECRET")
+REDDIT_USER_AGENT = os.getenv("REDDIT_USER_AGENT")
+REDDIT_USERNAME = os.getenv("REDDIT_USERNAME")
+REDDIT_PASSWORD = os.getenv("REDDIT_PASSWORD")
 
 # DB credentials
 DB_CONFIG = {
