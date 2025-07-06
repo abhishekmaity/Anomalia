@@ -1,5 +1,5 @@
 # config.py
-API_KEY = "your_openweathermap_api_key"  # Replace this
+API_KEY = "cb34f3563f4454cafde947a4023777d0"  # Added 'anomalia' OpenWeatherMap API 
 CITY = "Kolkata"
 UNITS = "metric"
 DB_CONFIG = {
