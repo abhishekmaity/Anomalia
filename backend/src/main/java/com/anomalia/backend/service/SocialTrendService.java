@@ -2,7 +2,6 @@ package com.anomalia.backend.service;
 
 import com.anomalia.backend.model.SocialTrend;
 import com.anomalia.backend.repository.SocialTrendRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,7 +11,6 @@ public class SocialTrendService {
 
     private final SocialTrendRepository repository;
 
-    @Autowired
     public SocialTrendService(SocialTrendRepository repository) {
         this.repository = repository;
     }

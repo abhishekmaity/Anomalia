@@ -1,12 +1,13 @@
 package com.anomalia.backend.controller;
 
-import com.anomalia.backend.model.EarthquakeEvent;
-import com.anomalia.backend.service.EarthquakeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import com.anomalia.backend.model.EarthquakeEvent;
+import com.anomalia.backend.service.EarthquakeService;
 
 import java.util.List;
 

@@ -2,7 +2,6 @@ package com.anomalia.backend.service;
 
 import com.anomalia.backend.model.WeatherAnomaly;
 import com.anomalia.backend.repository.WeatherRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,7 +11,6 @@ public class WeatherService {
 
     private final WeatherRepository repository;
 
-    @Autowired
     public WeatherService(WeatherRepository repository) {
         this.repository = repository;
     }
