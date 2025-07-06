@@ -1,4 +1,4 @@
-## 💬 Reddit Ingestion Microservice – Anomalia Project
+## 💬 Reddit Ingestion Microservice
 
 This microservice collects trending Reddit posts from multiple high-signal subreddits and stores them in the PostgreSQL database for anomaly detection and event correlation under the **Anomalia** platform.
 
