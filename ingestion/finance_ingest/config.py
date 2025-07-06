@@ -4,7 +4,7 @@ SYMBOL = "AAPL"
 DB_CONFIG = {
     'dbname': 'anomalia',
     'user': 'postgres',
-    'password': 'postgres',
+    'password': 'anomalia',
     'host': 'localhost',
     'port': 5432,
 }
