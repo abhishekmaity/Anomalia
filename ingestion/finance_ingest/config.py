@@ -1,4 +1,4 @@
-ALPHA_VANTAGE_API_KEY = "your_alpha_vantage_api_key_here"
+ALPHA_VANTAGE_API_KEY = "MPGCEYMQ138GWIJ9"
 SYMBOL = "AAPL"
 
 DB_CONFIG = {
