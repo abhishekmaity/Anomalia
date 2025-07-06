@@ -58,6 +58,6 @@ if __name__ == "__main__":
     try:
         data = fetch_stock_data()
         store_stock_data(data)
-        print("✅ Stock data ingested successfully.")
+        print("Stock data ingested successfully.")
     except Exception as e:
-        print("❌ Error:", e)
+        print("Error:", e)
