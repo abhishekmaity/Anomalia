@@ -24,22 +24,18 @@ def store_health_data(data):
     """)
 
     records = data.get("value", [])
-    print(f"📊 Records received: {len(records)}")
+    print(f"Records received: {len(records)}")
 
     for item in records:
-        indicator = item.get('Indicator', {}).get('Title') or item.get('indicator') or "unknown"
-        country = item.get("SpatialDim") or item.get("country") or "unknown"
-        date = item.get("TimeDim") or item.get("date") or "2024"
-        raw_value = item.get("Value") or item.get("value")
-        try:
-            value = float(str(raw_value).split()[0]) if raw_value else None
-        except:
-            value = None
-        if value is None:
-            print(f"Skipping invalid value: {raw_value}")
-            continue
+        indicator = item.get("IndicatorCode") or "unknown"
+        country = item.get("SpatialDim") or "unknown"
+        date = item.get("TimeDim") or "2024"
+        value = item.get("NumericValue")
 
-        print(f"Inserting: {indicator}, {country}, {date}, {value}")
+        if value is None:
+            print(f"Skipping due to missing value: {item}")
+            skipped_count += 1
+            continue
 
         try:
             cur.execute("""
@@ -52,8 +48,11 @@ def store_health_data(data):
                 f"{date}-01-01",
                 value
             ))
+            inserted_count += 1
         except Exception as e:
-            print(f"Skipped record due to error: {e}")
+            print(f"Insert failed: {e}")
+            skipped_count += 1
+
 
     conn.commit()
     cur.close()
