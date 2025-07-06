@@ -1,23 +1,23 @@
-# 🌍 Earthquake Ingestion Microservice
+## 🌍 Earthquake Ingestion Microservice
 
 This microservice fetches real-time earthquake data from the [USGS Earthquake Feed](https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php) and stores it in PostgreSQL for use in the Anomalia system.
 
-## ✅ Features
+### ✅ Features
 - Realtime ingestion from USGS GeoJSON feed
 - Stores magnitude, location, depth, timestamp
 - Deduplicates records via quake ID
 - Designed for microservice architecture
 
-## 🔧 Configuration
+### 🔧 Configuration
 Edit `config.py` to set DB config or change to `all_day.geojson` or `all_week.geojson`.
 
-## 🚀 Usage
+### 🚀 Usage
 ```bash
 pip install -r requirements.txt
 python3 earthquake_ingest.py
 ```
 
-## 🗃️ PostgreSQL Table Schema
+### 🗃️ PostgreSQL Table Schema
 ```sql
 CREATE TABLE earthquake_anomalies (
   id SERIAL PRIMARY KEY,
@@ -31,5 +31,5 @@ CREATE TABLE earthquake_anomalies (
 );
 ```
 
-## 📦 Data Source
+### 📦 Data Source
 [USGS Earthquake Feeds](https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php)
