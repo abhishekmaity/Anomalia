@@ -2,9 +2,11 @@ import os
 import praw
 import psycopg2
 from datetime import datetime
+from pathlib import Path
 from dotenv import load_dotenv
 
-load_dotenv()
+dotenv_path = Path(__file__).parent / '.env'
+load_dotenv(dotenv_path=dotenv_path)
 
 # Reddit credentials
 REDDIT_CLIENT_ID = os.getenv("W1Fnuv5ExpxppibkJcyfIA")
@@ -21,6 +23,17 @@ DB_CONFIG = {
     "user": os.getenv("DB_USER", "postgres"),
     "password": os.getenv("DB_PASSWORD", "anomalia")
 }
+def get_reddit_client():
+    return praw.Reddit(
+        client_id=REDDIT_CLIENT_ID,
+        client_secret=REDDIT_CLIENT_SECRET,
+        user_agent=REDDIT_USER_AGENT,
+        username=REDDIT_USERNAME,
+        password=REDDIT_PASSWORD
+    )
+
+SUBREDDITS = ["worldnews", "science", "technology", "globalhealth"]
+LIMIT = 10
 
 def fetch_and_store_trends():
     reddit = get_reddit_client()
