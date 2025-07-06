@@ -3,12 +3,13 @@ package com.anomalia.backend.controller;
 import com.anomalia.backend.model.EpidemicEvent;
 import com.anomalia.backend.service.EpidemicService;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
+import org.springframework.test.web.servlet.MockMvc;
+import org.mockito.Mockito;
 
 import java.time.Instant;
 import java.util.List;
@@ -16,22 +17,25 @@ import java.util.List;
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.mockito.Mockito.when;
 
 @WebMvcTest(EpidemicController.class)
-@Import(EpidemicControllerTest.TestConfig.class)
+@Import(EpidemicControllerTest.Config.class)
 public class EpidemicControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
-    @org.springframework.context.annotation.Configuration
-    static class TestConfig {
+    @Autowired
+    private EpidemicService epidemicService;
+
+    @TestConfiguration
+    static class Config {
         @Bean
         public EpidemicService epidemicService() {
             return Mockito.mock(EpidemicService.class);
         }
     }
-    private EpidemicService epidemicService;
 
     @Test
     public void testGetEpidemicEvents() throws Exception {
@@ -43,7 +47,7 @@ public class EpidemicControllerTest {
         e.setDeaths(24);
         e.setTimestamp(Instant.now());
 
-        Mockito.when(epidemicService.getAllRecent()).thenReturn(List.of(e));
+        when(epidemicService.getAllRecent()).thenReturn(List.of(e));
 
         mockMvc.perform(get("/api/epidemics"))
                 .andExpect(status().isOk())
