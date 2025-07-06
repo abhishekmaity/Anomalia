@@ -5,7 +5,8 @@ import com.anomalia.backend.service.WeatherService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -19,11 +20,14 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @WebMvcTest(WeatherController.class)
 public class WeatherControllerTest {
 
+    @Mock
+    private WeatherService weatherService;
+
+    @InjectMocks
+    private WeatherController weatherController;
+
     @Autowired
     private MockMvc mockMvc;
-
-    @MockBean
-    private WeatherService weatherService;
 
     @Test
     public void testGetWeatherAnomalies() throws Exception {

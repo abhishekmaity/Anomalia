@@ -5,9 +5,10 @@ import com.anomalia.backend.service.EpidemicService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 
 import java.time.Instant;
 import java.util.List;
@@ -17,12 +18,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 @WebMvcTest(EpidemicController.class)
+@Import(EpidemicControllerTest.TestConfig.class)
 public class EpidemicControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
+    @org.springframework.context.annotation.Configuration
+    static class TestConfig {
+        @Bean
+        public EpidemicService epidemicService() {
+            return Mockito.mock(EpidemicService.class);
+        }
+    }
     private EpidemicService epidemicService;
 
     @Test

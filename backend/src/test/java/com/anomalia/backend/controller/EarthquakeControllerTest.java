@@ -3,9 +3,12 @@ package com.anomalia.backend.controller;
 import com.anomalia.backend.model.EarthquakeEvent;
 import com.anomalia.backend.service.EarthquakeService;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -13,17 +16,22 @@ import java.time.Instant;
 import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
+@ExtendWith(MockitoExtension.class)
 @WebMvcTest(EarthquakeController.class)
 public class EarthquakeControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
+    @Mock
     private EarthquakeService earthquakeService;
+
+    @InjectMocks
+    private EarthquakeController earthquakeController;
 
     @Test
     public void testGetRecentEarthquakes() throws Exception {
