@@ -23,11 +23,16 @@ def store_health_data(data):
         );
     """)
 
-    for item in data.get("value", []):
+    records = data.get("value", [])
+    print(f"Records received: {len(records)}")
+
+    for item in records:
         indicator = item.get("Indicator") or item.get("indicator") or "unknown"
         country = item.get("SpatialDim") or item.get("country") or "unknown"
         date = item.get("TimeDim") or item.get("date") or "2024"
         value = item.get("Value") or item.get("value")
+
+        print(f"Inserting: {indicator}, {country}, {date}, {value}")
 
         try:
             cur.execute("""
@@ -42,6 +47,12 @@ def store_health_data(data):
             ))
         except Exception as e:
             print(f"Skipped record due to error: {e}")
+
+    conn.commit()
+    cur.close()
+    conn.close()
+    print("Health data committed to database.")
+
 
     conn.commit()
     cur.close()
