@@ -26,6 +26,9 @@ def store_health_data(data):
     records = data.get("value", [])
     print(f"Records received: {len(records)}")
 
+    inserted_count = 0
+    skipped_count = 0
+
     for item in records:
         indicator = item.get("IndicatorCode") or "unknown"
         country = item.get("SpatialDim") or "unknown"
