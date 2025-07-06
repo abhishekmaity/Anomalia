@@ -27,7 +27,7 @@ def store_health_data(data):
     print(f"📊 Records received: {len(records)}")
 
     for item in records:
-        indicator = item.get("Indicator") or item.get("indicator") or "unknown"
+        indicator = item.get('Indicator', {}).get('Title') or item.get('indicator') or "unknown"
         country = item.get("SpatialDim") or item.get("country") or "unknown"
         date = item.get("TimeDim") or item.get("date") or "2024"
         raw_value = item.get("Value") or item.get("value")
