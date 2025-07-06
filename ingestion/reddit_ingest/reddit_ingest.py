@@ -32,7 +32,7 @@ def get_reddit_client():
     )
 
 def fetch_and_store_trends():
-    print("Reddit ingestion coming soon!")
+    print("Reddit ingestion for trends!")
 
 if __name__ == "__main__":
     fetch_and_store_trends()
