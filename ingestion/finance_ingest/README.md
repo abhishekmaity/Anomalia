@@ -1,22 +1,22 @@
-# 💸 Finance Ingestion Microservice
+## 💸 Finance Ingestion Microservice
 
 Fetches stock market data from [Alpha Vantage](https://www.alphavantage.co/) and stores it in PostgreSQL.
 
-## Features
+### Features
 - Uses Alpha Vantage intraday API (60min)
 - Stores price, volume, timestamp, and symbol
 - Deduplicates records by symbol + timestamp
 
-## Configuration
+### Configuration
 Update `config.py` with your API key and desired stock symbol.
 
-## Usage
+### Usage
 ```bash
 pip install -r requirements.txt
 python3 finance_ingest.py
 ```
 
-## PostgreSQL Table
+### PostgreSQL Table
 ```sql
 CREATE TABLE stock_anomalies (
   id SERIAL PRIMARY KEY,
