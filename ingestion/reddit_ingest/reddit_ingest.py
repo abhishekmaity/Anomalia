@@ -22,17 +22,46 @@ DB_CONFIG = {
     "password": os.getenv("DB_PASSWORD", "anomalia")
 }
 
-def get_reddit_client():
-    return praw.Reddit(
-        client_id=REDDIT_CLIENT_ID,
-        client_secret=REDDIT_CLIENT_SECRET,
-        user_agent=REDDIT_USER_AGENT,
-        username=REDDIT_USERNAME,
-        password=REDDIT_PASSWORD
-    )
-
 def fetch_and_store_trends():
-    print("Reddit ingestion for trends!")
+    reddit = get_reddit_client()
+    conn = psycopg2.connect(**DB_CONFIG)
+    cur = conn.cursor()
+
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS reddit_trends (
+        id SERIAL PRIMARY KEY,
+        subreddit VARCHAR,
+        title TEXT,
+        score INTEGER,
+        url TEXT,
+        created_at TIMESTAMP,
+        UNIQUE(subreddit, title, created_at)
+    );
+    """)
+
+    inserted_count = 0
+    for sub in SUBREDDITS:
+        print(f"Fetching top posts from r/{sub}")
+        for post in reddit.subreddit(sub).hot(limit=LIMIT):
+            title = post.title
+            score = post.score
+            url = post.url
+            created_at = datetime.fromtimestamp(post.created_utc)
+
+            try:
+                cur.execute("""
+                    INSERT INTO reddit_trends (subreddit, title, score, url, created_at)
+                    VALUES (%s, %s, %s, %s, %s)
+                    ON CONFLICT DO NOTHING;
+                """, (sub, title, score, url, created_at))
+                inserted_count += 1
+            except Exception as e:
+                print(f"Skipped: {e}")
+
+    conn.commit()
+    print(f"Inserted {inserted_count} posts.")
+    cur.close()
+    conn.close()
 
 if __name__ == "__main__":
     fetch_and_store_trends()
