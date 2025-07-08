@@ -1,25 +1,24 @@
 package com.anomalia.backend.service;
 
-import com.anomalia.backend.model.WeatherAnomaly;
-import com.anomalia.backend.repository.WeatherRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.anomalia.backend.dto.WeatherAnomalyDTO;
+import com.anomalia.backend.mapper.WeatherMapper;
+import com.anomalia.backend.repository.WeatherRepository;
 
 @Service
 public class WeatherService {
 
-    private final WeatherRepository repository;
+    @Autowired
+    private WeatherRepository repository;
 
-    public WeatherService(WeatherRepository repository) {
-        this.repository = repository;
-    }
-
-    public List<WeatherAnomaly> getAllRecent() {
-        return repository.findAll();
-    }
-
-    public void save(WeatherAnomaly anomaly) {
-        repository.save(anomaly);
+    public Page<WeatherAnomalyDTO> getRecentAnomalies(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("recordedAt").descending());
+        return repository.findAll(pageable).map(WeatherMapper::toDTO);
     }
 }
