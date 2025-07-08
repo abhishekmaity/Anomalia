@@ -11,4 +11,8 @@ This microservice fetches real-time weather data from the [OpenWeatherMap API](h
 - ✅ Designed for plug-and-play use in a microservice pipeline
 - 🧪 Easy to extend to hourly/daily forecasts or alerts
 
-
+### Usage
+```bash
+pip install -r requirements.txt
+python3 weather_ingest.py
+```
