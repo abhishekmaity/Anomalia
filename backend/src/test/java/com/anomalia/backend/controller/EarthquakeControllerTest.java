@@ -1,59 +1,48 @@
 package com.anomalia.backend.controller;
 
-import com.anomalia.backend.model.EarthquakeEvent;
+import com.anomalia.backend.dto.EarthquakeEventDTO;
 import com.anomalia.backend.service.EarthquakeService;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Import;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.http.MediaType;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.data.domain.*;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
 
-import static org.hamcrest.Matchers.hasSize;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.mockito.Mockito.when;
-import org.mockito.Mockito;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(EarthquakeController.class)
-@Import(EarthquakeControllerTest.Config.class)
-public class EarthquakeControllerTest {
+@SpringBootTest
+@AutoConfigureMockMvc
+class EarthquakeControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
+    @MockBean
     private EarthquakeService earthquakeService;
 
-    @TestConfiguration
-    static class Config {
-        @Bean
-        public EarthquakeService earthquakeService() {
-            return Mockito.mock(EarthquakeService.class);
-        }
-    }
-
     @Test
-    public void testGetRecentEarthquakes() throws Exception {
-        EarthquakeEvent e = new EarthquakeEvent();
-        e.setId("eq-001");
-        e.setLocation("California");
-        e.setMagnitude(5.8);
-        e.setLatitude(36.7);
-        e.setLongitude(-121.6);
-        e.setTimestamp(Instant.now());
+    void getRecentReturnsPage() throws Exception {
+        EarthquakeEventDTO dto = new EarthquakeEventDTO();
+        dto.setLocation("TestLocation");
+        dto.setMagnitude(6.5);
+        dto.setDepth(10.0);
+        dto.setTime(LocalDateTime.now());
 
-        when(earthquakeService.getAllRecent()).thenReturn(List.of(e));
+        Page<EarthquakeEventDTO> page = new PageImpl<>(List.of(dto));
+        when(earthquakeService.getRecentEvents(0, 10)).thenReturn(page);
 
-        mockMvc.perform(get("/api/earthquakes"))
+        mockMvc.perform(get("/api/earthquakes/recent")
+                        .param("page", "0").param("size", "10")
+                        .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0].id").value("eq-001"))
-                .andExpect(jsonPath("$[0].location").value("California"));
+                .andExpect(jsonPath("$.content[0].location").value("TestLocation"));
     }
 }
