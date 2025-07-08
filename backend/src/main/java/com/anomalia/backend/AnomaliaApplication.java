@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
         version = "1.0",
         description = "Cross-Domain Global Anomaly Detection API"
 ))
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.anomalia.backend")
 public class AnomaliaApplication {
     public static void main(String[] args) {
         SpringApplication.run(AnomaliaApplication.class, args);
