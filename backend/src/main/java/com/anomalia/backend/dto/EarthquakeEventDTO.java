@@ -39,6 +39,12 @@ public class EarthquakeEventDTO {
     public void setTime(LocalDateTime time) {
         this.time = time;
     }
+    
+    @Override
+    public String toString() {
+        return "EarthquakeEventDTO [id=" + id + ", location=" + location + ", magnitude=" + magnitude + ", depth="
+                + depth + ", time=" + time + "]";
+    }
 
-    // Getters and Setters
+    
 }
