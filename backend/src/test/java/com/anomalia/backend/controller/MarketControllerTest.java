@@ -1,57 +1,50 @@
 package com.anomalia.backend.controller;
 
-import com.anomalia.backend.model.MarketAnomaly;
+import com.anomalia.backend.dto.MarketAnomalyDTO;
 import com.anomalia.backend.service.MarketService;
+
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Import;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.*;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.time.Instant;
+import java.time.LocalDate;
 import java.util.List;
 
-import static org.hamcrest.Matchers.hasSize;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.mockito.Mockito.when;
-import org.mockito.Mockito;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(MarketController.class)
-@Import(MarketControllerTest.Config.class)
-public class MarketControllerTest {
+@SpringBootTest
+@AutoConfigureMockMvc
+class MarketControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
+    @MockBean
     private MarketService marketService;
 
-    @TestConfiguration
-    static class Config {
-        @Bean
-        public MarketService marketService() {
-            return Mockito.mock(MarketService.class);
-        }
-    }
-
     @Test
-    public void testGetMarketAnomalies() throws Exception {
-        MarketAnomaly m = new MarketAnomaly();
-        m.setId("m-001");
-        m.setSymbol("AAPL");
-        m.setPriceChange(-3.45);
-        m.setPercentChange(-2.3);
-        m.setTimestamp(Instant.now());
+    void getRecentReturnsPage() throws Exception {
+        MarketAnomalyDTO dto = new MarketAnomalyDTO();
+        dto.setTicker("AAPL");
+        dto.setPrice(195.3);
+        dto.setAnomalyScore(0.88);
+        dto.setDate(LocalDate.now());
 
-        when(marketService.getAllRecent()).thenReturn(List.of(m));
+        Page<MarketAnomalyDTO> page = new PageImpl<>(List.of(dto));
+        when(marketService.getRecentAnomalies(0, 10)).thenReturn(page);
 
-        mockMvc.perform(get("/api/markets"))
+        mockMvc.perform(get("/api/markets/recent")
+                        .param("page", "0")
+                        .param("size", "10")
+                        .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0].id").value("m-001"))
-                .andExpect(jsonPath("$[0].symbol").value("AAPL"));
+                .andExpect(jsonPath("$.content[0].ticker").value("AAPL"));
     }
 }
