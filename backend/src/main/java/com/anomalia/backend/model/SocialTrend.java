@@ -1,9 +1,6 @@
 package com.anomalia.backend.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
+import jakarta.persistence.*;
 import java.time.Instant;
 
 @Entity
@@ -11,18 +8,21 @@ import java.time.Instant;
 public class SocialTrend {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String subreddit;
     private String title;
-    private int upvotes;
+    private String url; // ✅ now included
     private Instant timestamp;
+    private Integer upvotes;
 
     // Getters and Setters
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -42,12 +42,12 @@ public class SocialTrend {
         this.title = title;
     }
 
-    public int getUpvotes() {
-        return upvotes;
+    public String getUrl() {
+        return url;
     }
 
-    public void setUpvotes(int upvotes) {
-        this.upvotes = upvotes;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public Instant getTimestamp() {
@@ -58,10 +58,19 @@ public class SocialTrend {
         this.timestamp = timestamp;
     }
 
-    @Override
-    public String toString() {
-        return "SocialTrend [id=" + id + ", subreddit=" + subreddit + ", title=" + title + ", upvotes=" + upvotes
-                + ", timestamp=" + timestamp + "]";
+    public Integer getUpvotes() {
+        return upvotes;
     }
 
+    public void setUpvotes(Integer upvotes) {
+        this.upvotes = upvotes;
+    }
+
+    @Override
+    public String toString() {
+        return "SocialTrend [id=" + id + ", subreddit=" + subreddit + ", title=" + title + ", url=" + url
+                + ", timestamp=" + timestamp + ", upvotes=" + upvotes + "]";
+    }
+
+    
 }
