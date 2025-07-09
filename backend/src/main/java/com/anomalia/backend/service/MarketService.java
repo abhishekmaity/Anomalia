@@ -3,10 +3,10 @@ package com.anomalia.backend.service;
 import com.anomalia.backend.dto.MarketAnomalyDTO;
 import com.anomalia.backend.mapper.MarketMapper;
 import com.anomalia.backend.repository.MarketRepository;
-import com.anomalia.backend.model.MarketAnomaly;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,7 +15,6 @@ public class MarketService {
     private final MarketRepository repository;
     private final MarketMapper mapper;
 
-    @Autowired
     public MarketService(MarketRepository repository, MarketMapper mapper) {
         this.repository = repository;
         this.mapper = mapper;

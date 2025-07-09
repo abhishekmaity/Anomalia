@@ -19,18 +19,50 @@ public class MarketAnomaly {
     private Instant timestamp;
 
     // Getters and Setters
-    public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
+    public String getId() {
+        return id;
+    }
 
-    public String getSymbol() { return symbol; }
-    public void setSymbol(String symbol) { this.symbol = symbol; }
+    public void setId(String id) {
+        this.id = id;
+    }
 
-    public double getPriceChange() { return priceChange; }
-    public void setPriceChange(double priceChange) { this.priceChange = priceChange; }
+    public String getSymbol() {
+        return symbol;
+    }
 
-    public double getPercentChange() { return percentChange; }
-    public void setPercentChange(double percentChange) { this.percentChange = percentChange; }
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
 
-    public Instant getTimestamp() { return timestamp; }
-    public void setTimestamp(Instant timestamp) { this.timestamp = timestamp; }
+    public double getPriceChange() {
+        return priceChange;
+    }
+
+    public void setPriceChange(double priceChange) {
+        this.priceChange = priceChange;
+    }
+
+    public double getPercentChange() {
+        return percentChange;
+    }
+
+    public void setPercentChange(double percentChange) {
+        this.percentChange = percentChange;
+    }
+
+    public Instant getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Instant timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    @Override
+    public String toString() {
+        return "MarketAnomaly [id=" + id + ", symbol=" + symbol + ", priceChange=" + priceChange + ", percentChange="
+                + percentChange + ", timestamp=" + timestamp + "]";
+    }
+
 }
