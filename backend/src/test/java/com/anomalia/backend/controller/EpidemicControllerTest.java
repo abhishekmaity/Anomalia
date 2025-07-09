@@ -1,58 +1,48 @@
 package com.anomalia.backend.controller;
 
-import com.anomalia.backend.model.EpidemicEvent;
+import com.anomalia.backend.dto.EpidemicEventDTO;
 import com.anomalia.backend.service.EpidemicService;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Import;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.*;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.mockito.Mockito;
 
-import java.time.Instant;
+import java.time.LocalDate;
 import java.util.List;
 
-import static org.hamcrest.Matchers.hasSize;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(EpidemicController.class)
-@Import(EpidemicControllerTest.Config.class)
-public class EpidemicControllerTest {
+@SpringBootTest
+@AutoConfigureMockMvc
+class EpidemicControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
+    @MockBean
     private EpidemicService epidemicService;
 
-    @TestConfiguration
-    static class Config {
-        @Bean
-        public EpidemicService epidemicService() {
-            return Mockito.mock(EpidemicService.class);
-        }
-    }
-
     @Test
-    public void testGetEpidemicEvents() throws Exception {
-        EpidemicEvent e = new EpidemicEvent();
-        e.setId("ep-001");
-        e.setDiseaseName("Dengue");
-        e.setCountry("India");
-        e.setConfirmedCases(2300);
-        e.setDeaths(24);
-        e.setTimestamp(Instant.now());
+    void getRecentReturnsPage() throws Exception {
+        EpidemicEventDTO dto = new EpidemicEventDTO();
+        dto.setCountry("IND");
+        dto.setIndicator("LifeExpectancy");
+        dto.setValue(70.2);
+        dto.setDate(LocalDate.now());
 
-        when(epidemicService.getAllRecent()).thenReturn(List.of(e));
+        Page<EpidemicEventDTO> page = new PageImpl<>(List.of(dto));
+        when(epidemicService.getRecentEvents(0, 10)).thenReturn(page);
 
-        mockMvc.perform(get("/api/epidemics"))
+        mockMvc.perform(get("/api/epidemics/recent")
+                        .param("page", "0").param("size", "10")
+                        .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0].id").value("ep-001"))
-                .andExpect(jsonPath("$[0].diseaseName").value("Dengue"));
+                .andExpect(jsonPath("$.content[0].country").value("IND"));
     }
 }
