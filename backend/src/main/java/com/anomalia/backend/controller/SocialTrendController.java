@@ -1,29 +1,31 @@
 package com.anomalia.backend.controller;
 
-import com.anomalia.backend.model.SocialTrend;
+import com.anomalia.backend.dto.SocialTrendDTO;
 import com.anomalia.backend.service.SocialTrendService;
+
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 @RestController
 @RequestMapping("/api/social-trends")
+@Tag(name = "SocialTrends", description = "Reddit anomaly data")
 public class SocialTrendController {
 
     @Autowired
-    private SocialTrendService socialTrendService;
+    private SocialTrendService trendService;
 
-    @Operation(summary = "Get recent Reddit trends")
-    @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Successfully retrieved Reddit data"),
-        @ApiResponse(responseCode = "500", description = "Internal server error")
-    })
-    @GetMapping
-    public List<SocialTrend> getSocialTrends() {
-        return socialTrendService.getAllRecent();
+    @Operation(summary = "Get trending Reddit posts", description = "Returns a paginated list of trending Reddit anomalies")
+    @ApiResponse(responseCode = "200", description = "OK")
+    @GetMapping("/recent")
+    public Page<SocialTrendDTO> getRecent(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        return trendService.getTrendingPosts(page, size);
     }
 }
