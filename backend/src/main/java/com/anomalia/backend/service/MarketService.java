@@ -1,25 +1,28 @@
 package com.anomalia.backend.service;
 
-import com.anomalia.backend.model.MarketAnomaly;
+import com.anomalia.backend.dto.MarketAnomalyDTO;
+import com.anomalia.backend.mapper.MarketMapper;
 import com.anomalia.backend.repository.MarketRepository;
-import org.springframework.stereotype.Service;
+import com.anomalia.backend.model.MarketAnomaly;
 
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.*;
+import org.springframework.stereotype.Service;
 
 @Service
 public class MarketService {
 
     private final MarketRepository repository;
+    private final MarketMapper mapper;
 
-    public MarketService(MarketRepository repository) {
+    @Autowired
+    public MarketService(MarketRepository repository, MarketMapper mapper) {
         this.repository = repository;
+        this.mapper = mapper;
     }
 
-    public List<MarketAnomaly> getAllRecent() {
-        return repository.findAll();
-    }
-
-    public void save(MarketAnomaly anomaly) {
-        repository.save(anomaly);
+    public Page<MarketAnomalyDTO> getRecentAnomalies(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("date").descending());
+        return repository.findAll(pageable).map(mapper::toDTO);
     }
 }
