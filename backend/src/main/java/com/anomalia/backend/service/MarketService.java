@@ -5,10 +5,7 @@ import com.anomalia.backend.mapper.MarketMapper;
 import com.anomalia.backend.repository.MarketRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,8 +20,8 @@ public class MarketService {
         this.mapper = mapper;
     }
 
-    public Page<MarketAnomalyDTO> getRecentAnomalies(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by("date").descending());
+    public Page<MarketAnomalyDTO> getRecentEvents(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("timestamp").descending());
         return repository.findAll(pageable).map(mapper::toDTO);
     }
 }

@@ -6,6 +6,6 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface MarketMapper {
-    MarketAnomalyDTO toDTO(MarketAnomaly anomaly);
+    MarketAnomalyDTO toDTO(MarketAnomaly event);
     MarketAnomaly toEntity(MarketAnomalyDTO dto);
 }

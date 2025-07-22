@@ -24,7 +24,7 @@ public class EpidemicService {
     }
 
     public Page<EpidemicEventDTO> getRecentEvents(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by("date").descending());
+        Pageable pageable = PageRequest.of(page, size, Sort.by("timestamp").descending());
         return repository.findAll(pageable).map(mapper::toDTO);
     }
 }

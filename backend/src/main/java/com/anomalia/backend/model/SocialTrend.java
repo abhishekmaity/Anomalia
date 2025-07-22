@@ -13,7 +13,7 @@ public class SocialTrend {
 
     private String subreddit;
     private String title;
-    private String url; // ✅ now included
+    private String url; //now included
     private Instant timestamp;
     private Integer upvotes;
 

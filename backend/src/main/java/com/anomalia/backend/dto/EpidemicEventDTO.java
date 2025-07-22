@@ -1,5 +1,6 @@
 package com.anomalia.backend.dto;
 
+import java.time.Instant;
 import java.time.LocalDate;
 
 import jakarta.persistence.GeneratedValue;
@@ -10,23 +11,24 @@ public class EpidemicEventDTO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String indicator;
+    private String id;
+    private String diseaseName;
     private String country;
-    private LocalDate date;
-    private Double value;
+    private int confirmedCases;
+    private int deaths;
+    private Instant timestamp;
     
-    public Long getId() {
+    public String getId() {
         return id;
     }
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
-    public String getIndicator() {
-        return indicator;
+    public String getDiseaseName() {
+        return diseaseName;
     }
-    public void setIndicator(String indicator) {
-        this.indicator = indicator;
+    public void setDiseaseName(String diseaseName) {
+        this.diseaseName = diseaseName;
     }
     public String getCountry() {
         return country;
@@ -34,23 +36,30 @@ public class EpidemicEventDTO {
     public void setCountry(String country) {
         this.country = country;
     }
-    public LocalDate getDate() {
-        return date;
+    public int getConfirmedCases() {
+        return confirmedCases;
     }
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setConfirmedCases(int confirmedCases) {
+        this.confirmedCases = confirmedCases;
     }
-    public Double getValue() {
-        return value;
+    public int getDeaths() {
+        return deaths;
     }
-    public void setValue(Double value) {
-        this.value = value;
+    public void setDeaths(int deaths) {
+        this.deaths = deaths;
     }
-    @Override
-    public String toString() {
-        return "EpidemicEventDTO [id=" + id + ", indicator=" + indicator + ", country=" + country + ", date=" + date
-                + ", value=" + value + "]";
+    public Instant getTimestamp() {
+        return timestamp;
+    }
+    public void setTimestamp(Instant timestamp) {
+        this.timestamp = timestamp;
     }
 
+    @Override
+    public String toString() {
+        return "EpidemicEventDTO [id=" + id + ", diseaseName=" + diseaseName + ", country=" + country
+                + ", confirmedCases=" + confirmedCases + ", deaths=" + deaths + ", timestamp=" + timestamp + "]";
+    }
+      
     
 }
