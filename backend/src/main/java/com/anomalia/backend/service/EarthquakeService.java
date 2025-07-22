@@ -24,7 +24,7 @@ public class EarthquakeService {
     }
 
     public Page<EarthquakeEventDTO> getRecentEvents(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by("time").descending());
+        Pageable pageable = PageRequest.of(page, size, Sort.by("timestamp").descending());
         return repository.findAll(pageable).map(mapper::toDTO);
     }
 }
