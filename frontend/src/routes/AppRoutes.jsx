@@ -8,7 +8,6 @@ export default function AppRoutes() {
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/earthquakes" element={<EarthquakePage />} />
-        {/* Add routes for /weather, /epidemics, /social, /stocks */}
       </Routes>
     </Router>
   );

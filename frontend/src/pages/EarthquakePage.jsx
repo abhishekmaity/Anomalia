@@ -1,27 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import apiClient from '../api/apiClient';
+import React from "react";
 
-function EarthquakePage() {
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    apiClient.get('/earthquakes/recent?page=0&size=10')
-      .then((res) => setData(res.data.content))
-      .catch((err) => console.error(err));
-  }, []);
-
+export default function EarthquakePage() {
   return (
     <div>
-      <h2>Recent Earthquakes</h2>
-      <ul>
-        {data.map((event) => (
-          <li key={event.id}>
-            {event.location} - Magnitude: {event.magnitude}
-          </li>
-        ))}
-      </ul>
+      <h1>Earthquake Data</h1>
+      <p>This page will display recent earthquake events.</p>
     </div>
   );
 }
-
-export default EarthquakePage;
