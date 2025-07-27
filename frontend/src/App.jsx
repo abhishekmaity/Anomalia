@@ -1,11 +1,11 @@
-import React from 'react';
-import AppRoutes from './routes/AppRoutes';
+import { Button, Container, Title } from "@mantine/core";
 
 function App() {
   return (
-    <>
-      <AppRoutes />
-    </>
+    <Container>
+      <Title order={1}>Welcome to Anomalia Dashboard</Title>
+      <Button color="blue" mt="md">Click Me</Button>
+    </Container>
   );
 }
 
