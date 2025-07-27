@@ -1,4 +1,4 @@
-![Project Status](https://img.shields.io/badge/Status-In%20Development-yellow)
+![Project Status](https://img.shields.io/badge/Status-Cancelled-grey)
 ## 🌐 Anomalia – Cross-Domain Global Anomaly Detector
 
 Anomalia is a full-stack, real-time anomaly detection system that ingests and analyzes data across geophysical, environmental, social, epidemiological, and financial domains. Designed for large-scale awareness and research, it leverages modern open-source technologies and global data APIs.
