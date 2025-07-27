@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // Pages / Components
-import Dashboard from "../../pages/Dashboard";
+import Dashboard from "../pages/Dashboard";
 import EarthquakeList from "../../components/EarthquakeList";
 import WeatherList from "../../components/WeatherList";
 import EpidemicList from "../../components/EpidemicList";
