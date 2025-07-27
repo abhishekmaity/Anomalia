@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { fetchRecentEarthquakes } from '../api/earthquakeApi';
+import { fetchRecentEarthquakes } from '../src/api/earthquakeApi';
 
 const EarthquakeList = () => {
   const [data, setData] = useState([]);

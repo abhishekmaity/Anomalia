@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { fetchRecentSocialTrends } from "../api/socialTrendApi";
+import { fetchRecentSocialTrends } from "../src/api/socialTrendApi";
 
 export default function SocialTrendList() {
   const [trends, setTrends] = useState([]);

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { fetchRecentFinancialAnomalies } from "../api/financialApi";
+import { fetchRecentFinancialAnomalies } from "../src/api/financialApi";
 
 export default function FinancialAnomalyList() {
   const [financials, setFinancials] = useState([]);

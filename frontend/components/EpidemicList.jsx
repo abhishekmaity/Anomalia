@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { fetchRecentEpidemics } from "../api/epidemicApi";
+import { fetchRecentEpidemics } from "../src/api/epidemicApi";
 
 export default function EpidemicList() {
   const [epidemics, setEpidemics] = useState([]);
