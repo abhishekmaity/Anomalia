@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import NotFound from "../pages/NotFound";
 
 // Pages / Components
 import Dashboard from "../pages/Dashboard";
@@ -19,6 +20,8 @@ export default function AppRoutes() {
         <Route path="/epidemics" element={<EpidemicList />} />
         <Route path="/social-trends" element={<SocialTrendList />} />
         <Route path="/financial" element={<FinancialAnomalyList />} />
+        {/* Fallback Route */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );
